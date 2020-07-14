@@ -16,7 +16,7 @@ async function run() {
         resolve();
       });
     });
-    await promise();
+    await promise;
   } 
   catch (error) {
     core.setFailed(error.message);
