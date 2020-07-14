@@ -63,7 +63,8 @@ async function run() {
     let promise = new Promise(function(resolve, reject) {
       base64.encode(filePath, function(err, base64String) {
         if(err){
-          core.error("Failed to base64 encode "+filePath)
+          core.info("Failed to base64 encode "+filePath)
+          core.error(err);
           reject();
         }
         core.info("Base64 encode successful of"+filePath)
