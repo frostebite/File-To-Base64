@@ -16,7 +16,7 @@ jobs:
       with: 
         filePath: ./index.js
     -  run: |
-        if [ ${{steps.b64.outputs.base64}} == $(cat ./index.js | base64) ]; then
+        if [ "${{steps.b64.outputs.base64}}" = $(cat ./index.js | base64) ]; then
           exit
         else
           exit 1
