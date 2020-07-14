@@ -1,13 +1,13 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'FileToBase64'
+description: 'Converts a file to a base64 string'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  filePath:  # id of input
+    description: 'filePath of a file to base64 encode'
     required: true
-    default: '1000'
+    default: ''
 outputs:
-  time: # output will be available to future steps 
-    description: 'The message to output'
+  base64: # output will be available to future steps 
+    description: 'Base64 encoded file'
 runs:
   using: 'node12'
   main: 'dist/index.js'
