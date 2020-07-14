@@ -1,12 +1,12 @@
 const core = require('@actions/core');
-var base64 = require('file-base64');
-
+const base64 = require('file-base64');
+const path = require('path');
 // most @actions toolkit packages have async methods
 async function run() {
   try { 
     const filePath = core.getInput('filePath');
     let promise = new Promise(function(resolve, reject) {
-      base64.encode(filePath, function(err, base64String) {
+      base64.encode(path.normalize(filePath), function(err, base64String) {
         if(err){
           core.info("Failed to base64 encode "+filePath)
           core.error(err);

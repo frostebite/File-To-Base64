@@ -54,14 +54,14 @@ module.exports = require("os");
 /***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
 
 const core = __webpack_require__(470);
-var base64 = __webpack_require__(376);
-
+const base64 = __webpack_require__(376);
+const path = __webpack_require__(622);
 // most @actions toolkit packages have async methods
 async function run() {
   try { 
     const filePath = core.getInput('filePath');
     let promise = new Promise(function(resolve, reject) {
-      base64.encode(filePath, function(err, base64String) {
+      base64.encode(path.normalize(filePath), function(err, base64String) {
         if(err){
           core.info("Failed to base64 encode "+filePath)
           core.error(err);
