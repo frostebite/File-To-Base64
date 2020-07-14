@@ -65,7 +65,7 @@ async function run() {
         if(err){
           core.info("Failed to base64 encode "+filePath)
           core.error(err);
-          reject();
+          reject(err);
         }
         core.info("Base64 encode successful of"+filePath)
         core.setOutput('base64', base64String);
