@@ -1,11 +1,11 @@
 const core = require('@actions/core');
 const wait = require('./wait');
-
+const fs = require('fs');
 
 // most @actions toolkit packages have async methods
 async function run() {
   try { 
-    const ms = core.getInput('milliseconds');
+    const filePath = core.getInput('filePath');
     console.log(`Waiting ${ms} milliseconds ...`)
 
     core.debug((new Date()).toTimeString())
