@@ -1,10 +1,12 @@
 const core = require('@actions/core');
 const base64 = require('file-base64');
 const path = require('path');
+const untildify = require('untildify');
+ 
 // most @actions toolkit packages have async methods
 async function run() {
   try { 
-    const filePath = core.getInput('filePath');
+    const filePath = untildify(core.getInput('filePath'));
     let promise = new Promise(function(resolve, reject) {
       base64.encode(path.normalize(filePath), function(err, base64String) {
         if(err){
