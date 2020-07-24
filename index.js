@@ -13,7 +13,8 @@ async function run() {
           reject(err);
           return;
         }
-        core.info("Base64 encode successful of"+filePath)
+        core.info("Base64 encode successful of"+filePath);
+        core.setSecret(base64String);
         core.setOutput('base64', base64String);
         resolve();
       });
