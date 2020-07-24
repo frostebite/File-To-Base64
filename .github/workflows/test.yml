@@ -11,16 +11,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - run: |
+        mkdir -p ~/test
+        cp ./index.js ~/test/index.js
     - uses: ./
       id: b64
       with: 
-        filePath: ./index.js
+        filePath: ~/test/index.js
     -  run: |
         B64=$(cat ./index.js | base64 -w0)
         echo "${{steps.b64.outputs.base64}}"
         echo "$B64"
         if [ "${{steps.b64.outputs.base64}}" = "$B64" ]; then
+          echo "Base64 match"
           exit
         else
+         echo "Base64 does not match"
           exit 1
         fi
