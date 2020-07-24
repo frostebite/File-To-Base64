@@ -56,10 +56,12 @@ module.exports = require("os");
 const core = __webpack_require__(470);
 const base64 = __webpack_require__(376);
 const path = __webpack_require__(622);
+const untildify = __webpack_require__(385);
+ 
 // most @actions toolkit packages have async methods
 async function run() {
   try { 
-    const filePath = core.getInput('filePath');
+    const filePath = untildify(core.getInput('filePath'));
     let promise = new Promise(function(resolve, reject) {
       base64.encode(path.normalize(filePath), function(err, base64String) {
         if(err){
@@ -68,7 +70,8 @@ async function run() {
           reject(err);
           return;
         }
-        core.info("Base64 encode successful of"+filePath)
+        core.info("Base64 encode successful of"+filePath);
+        core.setSecret(base64String);
         core.setOutput('base64', base64String);
         resolve();
       });
@@ -2223,6 +2226,26 @@ module.exports = {
   encode: encode,
   decode: decode
 }
+
+
+/***/ }),
+
+/***/ 385:
+/***/ (function(module, __unusedexports, __webpack_require__) {
+
+"use strict";
+
+const os = __webpack_require__(87);
+
+const homeDirectory = os.homedir();
+
+module.exports = pathWithTilde => {
+	if (typeof pathWithTilde !== 'string') {
+		throw new TypeError(`Expected a string, got ${typeof pathWithTilde}`);
+	}
+
+	return homeDirectory ? pathWithTilde.replace(/^~(?=$|\/|\\)/, homeDirectory) : pathWithTilde;
+};
 
 
 /***/ }),
