@@ -11,10 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+    - run: |
+        mkdir -r ~/test
+        cp ./index.js ~/test/index.js
     - uses: ./
       id: b64
       with: 
-        filePath: ./index.js
+        filePath: ~/test/index.js
     -  run: |
         B64=$(cat ./index.js | base64 -w0)
         echo "${{steps.b64.outputs.base64}}"
